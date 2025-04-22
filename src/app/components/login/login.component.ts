@@ -54,7 +54,7 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error(err);
-          alert("Login failed. Please try again.");
+          alert("Login failed. Please try again");
         }
       });
     } else {
