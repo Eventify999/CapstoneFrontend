@@ -47,7 +47,8 @@ export class LoginComponent {
             alert("Login Success");
             localStorage.setItem('loginUser', loginPayload.Username);
             localStorage.setItem('myLogInToken', res.token); // or res.data.token depending on your API
-            this.router.navigateByUrl('dashboard/v');
+            sessionStorage.setItem('isLogged','true');
+            this.router.navigateByUrl('dashboard/c');
           } else {
             alert(res.message);
           }

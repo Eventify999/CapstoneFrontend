@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule,CommonModule]
 
 })
 export class RegisterComponent {
@@ -43,14 +44,12 @@ export class RegisterComponent {
 
       const endpoint = `https://localhost:5005/api/auth/register/${role}`;
 
-
+      console.log('data: ',formData);
       this.http.post(endpoint, formData).subscribe({
       next: (res: any) => {
-        alert('Registration Successful!');
         this.router.navigateByUrl('/login');
       },
       error: (err) => {
-        alert('Registration failed. Please try again.');
         console.error(err);
       }
     });
