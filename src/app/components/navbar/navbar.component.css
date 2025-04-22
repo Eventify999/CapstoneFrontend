@@ -1,0 +1,13 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1050; /* Higher than carousel captions */
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly darker on scroll if you want */
+  }
+  

@@ -1,0 +1,112 @@
+.vendor-dashboard {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  
+  .dashboard-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .sidebar-card {
+    border-radius: 8px;
+    overflow: hidden;
+    
+    .nav-link {
+      padding: 12px 16px;
+      color: #495057;
+      border-left: 3px solid transparent;
+      transition: all 0.3s;
+      
+      &:hover {
+        background-color: #f1f5f9;
+        color: #0d6efd;
+      }
+      
+      &.active {
+        background-color: #e9f5ff;
+        color: #0d6efd;
+        border-left-color: #0d6efd;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .package-card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .gold-header {
+      background: linear-gradient(135deg, #FFD700, #D4AF37);
+    }
+    
+    .silver-header {
+      background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+    }
+    
+    .bronze-header {
+      background: linear-gradient(135deg, #CD7F32, #B87333);
+    }
+    
+    .card-title {
+      font-weight: 700;
+    }
+    
+    ul {
+      padding-left: 20px;
+      
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+  
+  .table {
+    th {
+      font-weight: 600;
+      color: #495057;
+      border-top: none;
+    }
+    
+    td {
+      vertical-align: middle;
+    }
+    
+    .badge {
+      padding: 6px 10px;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+  }
+  
+  .modal-header {
+    border-radius: 0;
+  }
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
