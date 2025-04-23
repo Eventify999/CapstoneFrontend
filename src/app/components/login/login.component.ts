@@ -1,22 +1,18 @@
 import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone:true,
-  imports:[ReactiveFormsModule]
+  standalone: true,
+  imports: [ReactiveFormsModule]
 })
 export class LoginComponent {
 
   loginForm: FormGroup;
-  // private http = inject(HttpClient); 
-  // private router = inject(Router); 
-  // private fb = inject(FormBuilder);
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.loginForm = this.fb.group({
@@ -26,12 +22,6 @@ export class LoginComponent {
     });
   }
 
-
-  userObj : any = {
-  };
-
- 
-  
   onLogin() {
     if (this.loginForm.valid) {
       const formValue = this.loginForm.value;
@@ -44,30 +34,44 @@ export class LoginComponent {
       this.http.post("https://localhost:5005/api/auth/Login", loginPayload).subscribe({
         next: (res: any) => {
           if (res.result) {
-            alert("Login Success");
+            // Store user data and token in localStorage
             localStorage.setItem('loginUser', loginPayload.Username);
-            localStorage.setItem('myLogInToken', res.token); // or res.data.token depending on your API
-            this.router.navigateByUrl('dashboard/v');
-          } else {
+            localStorage.setItem('myLogInToken', res.token);
+            const userRoles = res.result.roles;
+  if (userRoles && userRoles.length > 0) {
+    const role = userRoles[0];  // assuming one role per user
+    localStorage.setItem('userRole', role);
+
+    if (role === 'Customer') {
+      this.router.navigateByUrl('dashboard/c');
+    } else if (role === 'Vendor') {
+      this.router.navigateByUrl('dashboard/v');
+    } else if (role === 'Admin') {
+      this.router.navigateByUrl('dashboard');
+    }
+  }
+ } else {
             alert(res.message);
           }
         },
         error: (err) => {
           console.error(err);
-          alert("Login failed. Please try again");
+          alert("Login failed. Please try again.");
         }
       });
     } else {
       this.loginForm.markAllAsTouched();
     }
   }
-navigateToRegister() {
-  this.router.navigate(['/register']);
-}
 
-logOff() { 
-  localStorage.removeItem('loginUser'); 
-  this.router.navigateByUrl('login'); 
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  logOff() {
+    localStorage.removeItem('loginUser');
+    localStorage.removeItem('myLogInToken');
+    localStorage.removeItem('userRole');
+    this.router.navigateByUrl('login');
   }
 }
-

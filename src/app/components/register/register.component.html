@@ -60,9 +60,17 @@
             </span>
             <input type="password" class="form-control custom-input" placeholder="Enter your Password" formControlName="password" [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
           </div>
-          <div class="text-danger small mb-3" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-            Password is required.
+          <div class="text-danger small mb-1" *ngIf="registerForm.get('password')?.errors?.['complexity'] && registerForm.get('password')?.touched">
+            Password must contain:
+            <ul class="mb-0">
+              <li>At least an uppercase letter</li>
+              <li>At least a lowercase letter</li>
+              <li>At least a number</li>
+              <li>At least a special character</li>
+              <li>Minimum 8 characters</li>
+            </ul>
           </div>
+          
 
           <!-- Phone Number -->
           <label class="form-label text-muted">Phone Number</label>
@@ -77,7 +85,7 @@
           </div>
 
           <!-- Hidden Role Field -->
-          <input type="hidden" formControlName="role" />
+          <!-- <input type="hidden" formControlName="role" /> -->
 
           <!-- Register Button -->
           <div class="d-grid mb-4">
