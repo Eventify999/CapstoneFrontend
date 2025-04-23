@@ -1,0 +1,71 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
+
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.animate__animated.animate__fadeInUp {
+  opacity: 1 !important;
+}
+
+.about-section{
+  margin: 2% auto;
+}
+
+
+/***********************************/
+.about-section {
+  background-color: var(--white);
+  padding: 50px 0;
+  font-family: var(--font-family);
+}
+
+.fw-bold {
+  font-weight: 700;
+}
+
+h2, h4 {
+  font-family: 'Poppins', sans-serif;
+  color: var(--primary-text-color);
+}
+
+.text-muted {
+  color: var(--text-muted-color);
+}
+
+.list-group-item {
+  background-color: var(--white);
+  border: none;
+  font-size: 16px;
+  padding: 15px;
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1;
+}
+
+.card {
+  border: none;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.carousel-item {
+  font-style: italic;
+}
+
+.carousel-inner {
+  text-align: center;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: var(--primary-text-color);
+}
+
+.text-primary-color{
+  color: var(--primary-text-color);
+}

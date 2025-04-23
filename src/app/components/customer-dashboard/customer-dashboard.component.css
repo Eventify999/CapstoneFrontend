@@ -1,0 +1,32 @@
+/* src/app/components/customer-dashboard/customer-dashboard.component.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .input-group {
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+  
+  .card {
+    transition: transform 0.2s;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .card-title {
+    color: #0d6efd;
+    font-weight: bold;
+  }
+  
+  .alert {
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }

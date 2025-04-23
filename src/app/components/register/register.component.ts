@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'; // 👈 import ToastrService
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterComponent {
   http = inject(HttpClient);
   router = inject(Router);
   fb = inject(FormBuilder);
+  toastr = inject(ToastrService); // 👈 inject toastr
 
   constructor() {
     this.registerForm = this.fb.group({
@@ -35,31 +37,26 @@ export class RegisterComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
-      const formData = {
-        ...this.registerForm.value,
-        phoneNumber: String(this.registerForm.value.phoneNumber),
-        role: this.selectedRole
-      };
-      
+      const formData = this.registerForm.value;
+      const role = formData.role.toLowerCase(); // 'customer' or 'vendor'
 
-      console.log('Submitting registration form with data:', formData);
-      
-      const endpoint = `https://localhost:5005/api/auth/register/${this.selectedRole.toLowerCase()}`;
+      const endpoint = `https://localhost:5005/api/auth/register/${role}`;
+
 
       this.http.post(endpoint, formData).subscribe({
-        next: (res: any) => {
-          alert('Registration Successful!');
-          this.router.navigateByUrl('/login');
-        },
-        error: (err) => {
-          console.error('Registration error:', err);
-          alert(err?.error?.message || 'Registration failed. Please check your input and try again.');
-        }
-      });
-    } else {
-      this.registerForm.markAllAsTouched();
-    }
+      next: (res: any) => {
+        alert('Registration Successful!');
+        this.router.navigateByUrl('/login');
+      },
+      error: (err) => {
+        alert('Registration failed. Please try again.');
+        console.error(err);
+      }
+    });
+  } else {
+    this.registerForm.markAllAsTouched();
   }
+}
 
   navigateToLogin() {
     this.router.navigate(['/login']);

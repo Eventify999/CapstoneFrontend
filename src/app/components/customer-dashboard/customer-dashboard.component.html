@@ -1,4 +1,87 @@
-<p>customer-dashboard works!</p>
-
-
-
+<div class="container-fluid p-0">
+    <app-navbar></app-navbar>
+  
+    <!-- Main content with padding to offset the fixed navbar -->
+    <div class="container pt-5 mt-4">
+      
+      <!-- Error messages -->
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+  
+      <!-- Loading indicator -->
+      <div *ngIf="isLoading" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Searching for places...</p>
+      </div>
+  
+      <!-- Search inputs -->
+      <div class="mt-4">
+        <!-- <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter a location (e.g., Trivandrum, Kerala, IN)"
+            [(ngModel)]="locationInput"
+            (keyup.enter)="fetchCoordinates()"
+          />
+          <button class="btn btn-secondary" (click)="fetchCoordinates()">Enter</button>
+        </div> -->
+  
+        <div class="mb-3">
+          <label for="locationSelect" class="form-label">Select a location:</label>
+          <select id="locationSelect" class="form-select" (change)="onLocationChange($event)">
+            <option value="" disabled selected>Select a location</option>
+            <option *ngFor="let loc of predefinedLocations" [value]="loc.lat + ',' + loc.lon">
+              {{ loc.name }}
+            </option>
+          </select>
+        </div>
+  
+        <!-- Category Input -->
+        <div class="mb-3">
+          <label for="categorySelect" class="form-label">Select a category:</label>
+          <select id="categorySelect" class="form-select" [(ngModel)]="selectedCategory">
+            <option value="" disabled selected>Select a category</option>
+            <option *ngFor="let cat of predefinedCategories" [value]="cat.code">
+              {{ cat.label }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="mb-3">
+          <button class="btn btn-primary" (click)="searchPlaces()" [disabled]="!selectedCategory || !lat || !lon">
+            Search
+          </button>
+        </div>
+  
+        <!-- No results message -->
+        <div *ngIf="results.length === 0 && !isLoading && !errorMessage" class="alert alert-info">
+          No places found. Try a different search term or location.
+        </div>
+  
+        <!-- Results grid -->
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let place of results">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">{{ place.properties.name || 'Unnamed Place' }}</h5>
+                <p class="card-text">
+                  {{ place.properties.categories?.join(', ') }}
+                </p>
+                <p class="card-text">
+                  {{ place.properties.address_line1 }}, {{ place.properties.address_line2 }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
