@@ -12,11 +12,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard/c', component:CustomerDashboardComponent },
-<<<<<<< HEAD
-  { path: 'dashboard/v', component:VendorDashboardComponent }
-=======
   { path: 'dashboard/v', component:VendorDashboardComponent },
   { path: 'about', component:AboutComponent },
   { path: 'team', component:TeamComponent }
->>>>>>> d254f093dfd5c003da01c1980272f25b01e6e6aa
 ];
